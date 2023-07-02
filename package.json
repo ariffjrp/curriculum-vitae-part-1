@@ -2,10 +2,10 @@
   "name": "curriculum-vitae",
   "version": "1.0.0",
   "description": "Membuat curriculum vitae dari sisi back end",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon server.js",
-    "dev-resync": "set NODE_ENV=dev-resync && npx sequelize-cli db:drop --env=development&& npx sequelize-cli db:create --env=development && nodemon server.js",
+    "dev-resync": "cross-env NODE_ENV=dev-resync && npx sequelize-cli db:drop --env development --config ./src/config/config.json && npx sequelize-cli db:create --env development --config ./src/config/config.json && nodemon server.js",
     "test": "cross-env NODE_ENV=test jest"
   },
   "author": "Arif Fajar Pangestu",

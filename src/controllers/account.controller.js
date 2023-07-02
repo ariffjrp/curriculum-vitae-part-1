@@ -63,7 +63,7 @@ const storage = multer.memoryStorage();
 const upload = multer({ 
   storage: storage,
   limits: {
-    fileSize: 5 * 1024 * 1024,
+    fileSize: 2 * 1024 * 1024,
   },
 });
 
@@ -71,6 +71,9 @@ exports.updateAvatar = (req, res) => {
   upload.single('avatar')(req, res, (err) => {
     if (err instanceof multer.MulterError) {
       // Tangani error yang terkait dengan Multer
+      if (err.code === 'LIMIT_FILE_SIZE') {
+        return res.status(400).send({ message: 'File size exceeds the allowed limit of 2MB.' });
+      }
       console.error(err);
       res.status(400).send({ message: 'Failed to upload avatar. Please try again later.' });
     } else if (err) {
